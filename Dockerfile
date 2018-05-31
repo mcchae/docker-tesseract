@@ -6,6 +6,7 @@ RUN echo "deb http://ppa.launchpad.net/alex-p/tesseract-ocr/ubuntu xenial main\n
     && apt-get update \
     && apt-get install tesseract-ocr -y \
     && apt-get install tesseract-ocr-kor -y \
-    && apt-get install tesseract-ocr-jpn -y
+    && apt-get install tesseract-ocr-jpn -y \
+    && apt-get install tesseract-ocr-chi-tra -y
 
 CMD ["tesseract"]
