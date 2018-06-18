@@ -1,12 +1,39 @@
-FROM ubuntu:16.04
-MAINTAINER MoonChang Chae <mcchae@gmail.com>
+#FROM mcchae/sshd-x
+FROM alpine
+MAINTAINER MoonChang Chae mcchae@gmail.com
+LABEL Description="alpine tesseract 4.x"
 
-RUN echo "deb http://ppa.launchpad.net/alex-p/tesseract-ocr/ubuntu xenial main\ndeb-src http://ppa.launchpad.net/alex-p/tesseract-ocr/ubuntu xenial main " >> /etc/apt/sources.list \
-    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys CEF9E52D \
-    && apt-get update \
-    && apt-get install tesseract-ocr -y \
-    && apt-get install tesseract-ocr-kor -y \
-    && apt-get install tesseract-ocr-jpn -y \
-    && apt-get install tesseract-ocr-chi-tra -y
+ENV TESSDATA_PREFIX /usr/local/share
+ENV LAN_TYPE best
+#ENV LAN_TYPE fast
+WORKDIR /tmp
+RUN apk --update add --virtual build-dependencies alpine-sdk automake autoconf libtool \
+	libpng-dev libjpeg-turbo-dev tiff-dev zlib-dev wget git \
+	# for Leptonica
+	&& wget -q http://www.leptonica.org/source/leptonica-1.76.0.tar.gz \
+	&& tar xvfz leptonica-1.76.0.tar.gz \
+	&& cd leptonica-1.76.0 \
+	&& ./configure \
+	&& make \
+	&& make install \
+	&& cd .. \
+	&& rm -rf leptonica* \
+	# for tesseract
+	&& git clone --depth 1 https://github.com/tesseract-ocr/tesseract.git \
+	&& cd tesseract 
 
-CMD ["tesseract"]
+#	&& ./autogen.sh \
+#	&& ./configure --enable-debug \
+#	&& LDFLAGS="-L/usr/local/lib" CFLAGS="-I/usr/local/include" make \
+#	&& make install \
+#	&& ldconfig \
+#	&& cd .. \
+#	&& rm -rf tesseract* \
+#	&& apk del build-dependencies \
+#	# for tesseract data
+#	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/eng.trainedda \
+#	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/kor.trainedda \
+#	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/jpn.trainedda \
+#	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/chi_tra.trainedda
+#
+#CMD ["tesseract"]
