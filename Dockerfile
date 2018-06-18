@@ -3,6 +3,8 @@ FROM alpine
 MAINTAINER MoonChang Chae mcchae@gmail.com
 LABEL Description="alpine tesseract 4.x"
 
+ADD autogen.sh configure /tmp/
+
 ENV TESSDATA_PREFIX /usr/local/share
 ENV LAN_TYPE best
 #ENV LAN_TYPE fast
@@ -20,20 +22,21 @@ RUN apk --update add --virtual build-dependencies alpine-sdk automake autoconf l
 	&& rm -rf leptonica* \
 	# for tesseract
 	&& git clone --depth 1 https://github.com/tesseract-ocr/tesseract.git \
-	&& cd tesseract 
-
-#	&& ./autogen.sh \
+	&& cd tesseract \
+	&& mv /tmp/autogen.sh . && chown root:root autogen.sh \
+	&& ./autogen.sh \
+	&& mv /tmp/configure . && chown root:root configure 
 #	&& ./configure --enable-debug \
 #	&& LDFLAGS="-L/usr/local/lib" CFLAGS="-I/usr/local/include" make \
 #	&& make install \
 #	&& ldconfig \
 #	&& cd .. \
 #	&& rm -rf tesseract* \
-#	&& apk del build-dependencies \
 #	# for tesseract data
 #	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/eng.trainedda \
 #	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/kor.trainedda \
 #	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/jpn.trainedda \
-#	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/chi_tra.trainedda
+#	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/chi_tra.trainedda \
+#	&& apk del build-dependencies
 #
 #CMD ["tesseract"]
