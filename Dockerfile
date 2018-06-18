@@ -25,8 +25,9 @@ RUN apk --update add --virtual build-dependencies alpine-sdk automake autoconf l
 	&& cd tesseract \
 	&& mv /tmp/autogen.sh . && chown root:root autogen.sh \
 	&& ./autogen.sh \
-	&& mv /tmp/configure . && chown root:root configure 
+	&& cp /tmp/configure . && chown root:root configure 
 #	&& ./configure --enable-debug \
+#	&& cp /tmp/configure . && chown root:root configure \
 #	&& LDFLAGS="-L/usr/local/lib" CFLAGS="-I/usr/local/include" make \
 #	&& make install \
 #	&& ldconfig \
