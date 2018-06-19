@@ -26,8 +26,8 @@ RUN apk --update add --virtual build-dependencies alpine-sdk automake autoconf l
 	&& mv /tmp/autogen.sh . && chown root:root autogen.sh \
 	&& ./autogen.sh \
 	&& cp /tmp/configure . && chown root:root configure \
-#	&& ./configure --enable-debug \
-#	&& LDFLAGS="-L/usr/local/lib" CFLAGS="-I/usr/local/include" make \
+	&& ./configure --enable-debug \
+	&& LDFLAGS="-L/usr/local/lib" CFLAGS="-I/usr/local/include" make \
 #	&& make install \
 #	&& ldconfig \
 #	&& cd .. \
