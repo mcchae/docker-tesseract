@@ -28,15 +28,17 @@ RUN apk --update add --virtual build-dependencies alpine-sdk automake autoconf l
 	&& cp /tmp/configure . && chown root:root configure \
 	&& ./configure --enable-debug \
 	&& LDFLAGS="-L/usr/local/lib" CFLAGS="-I/usr/local/include" make \
-#	&& make install \
+	&& make install \
 #	&& ldconfig \
 #	&& cd .. \
 #	&& rm -rf tesseract* \
-#	# for tesseract data
-#	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/eng.trainedda \
-#	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/kor.trainedda \
-#	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/jpn.trainedda \
-#	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/chi_tra.trainedda \
-#	&& apk del build-dependencies
-#
-#CMD ["tesseract"]
+	# for tesseract data
+#	&& mkdir -p $TESSDATA_PREFIX/tessdata \
+#	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/eng.traineddata \
+#	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/kor.traineddata \
+#	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/jpn.traineddata \
+#	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/chi_tra.traineddata \
+	&& apk del build-dependencies
+
+WORKDIR /
+CMD ["tesseract"]
