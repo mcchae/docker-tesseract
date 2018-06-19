@@ -9,8 +9,8 @@ ENV TESSDATA_PREFIX /usr/local/share
 ENV LAN_TYPE best
 #ENV LAN_TYPE fast
 WORKDIR /tmp
+RUN apk --update add libpng-dev libjpeg-turbo-dev tiff-dev zlib-dev wget git
 RUN apk --update add --virtual build-dependencies alpine-sdk automake autoconf libtool \
-	libpng-dev libjpeg-turbo-dev tiff-dev zlib-dev wget git \
 	# for Leptonica
 	&& wget -q http://www.leptonica.org/source/leptonica-1.76.0.tar.gz \
 	&& tar xvfz leptonica-1.76.0.tar.gz \
