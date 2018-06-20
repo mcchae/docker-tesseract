@@ -174,7 +174,28 @@ CMD ["tesseract"]
 
 그 라이브러리는 /usr/lib에 있는 다음과 같은 것들입니다.
 
+```sh
+drwxr-xr-x  0 mcchae staff       0  6 20 16:35 lib/
+lrwxr-xr-x  0 mcchae staff       0  6 20 16:32 lib/libstdc++.so.6 -> libstdc++.so.6.0.22
+-rwxr-xr-x  0 mcchae staff  186160  6 20 16:35 lib/libpng16.so.16.34.0
+lrwxr-xr-x  0 mcchae staff       0  6 20 16:32 lib/libstdc++.so -> libstdc++.so.6.0.22
+lrwxr-xr-x  0 mcchae staff       0  6 20 16:35 lib/libpng16.so.16 -> libpng16.so.16.34.0
+-rwxr-xr-x  0 mcchae staff  424224  6 20 16:35 lib/libtiff.so.5.3.0
+-rw-r--r--  0 mcchae staff   71400  6 20 16:33 lib/libgcc_s.so.1
+-rwxr-xr-x  0 mcchae staff  137480  6 20 16:34 lib/libgomp.so.1.0.0
+lrwxr-xr-x  0 mcchae staff       0  6 20 16:35 lib/libpng16.so -> libpng16.so.16.34.0
+lrwxr-xr-x  0 mcchae staff       0  6 20 16:35 lib/libjpeg.so -> libjpeg.so.8.1.2
+-rwxr-xr-x  0 mcchae staff 1370496  6 20 16:32 lib/libstdc++.so.6.0.22
+-rwxr-xr-x  0 mcchae staff  386872  6 20 16:35 lib/libjpeg.so.8.1.2
+lrwxr-xr-x  0 mcchae staff       0  6 20 16:34 lib/libgomp.so.1 -> libgomp.so.1.0.0
+lrwxr-xr-x  0 mcchae staff       0  6 20 16:35 lib/libtiff.so.5 -> libtiff.so.5.3.0
+lrwxr-xr-x  0 mcchae staff       0  6 20 16:35 lib/libjpeg.so.8 -> libjpeg.so.8.1.2
+lrwxr-xr-x  0 mcchae staff       0  6 20 16:34 lib/libgomp.so -> libgomp.so.1.0.0
+-rw-r--r--  0 mcchae staff     132  6 20 16:33 lib/libgcc_s.so
+lrwxr-xr-x  0 mcchae staff       0  6 20 16:35 lib/libtiff.so -> libtiff.so.5.3.0
+```
 
+한가지 유의할 것은 `LAN_TYPE`을 정의하였는데, `best` 또는 `fast` 중에 하나를 지정할 수 있습니다. 이것은 해당 OCR 데이터가 정확도를 우선으로 하는가 아니면 속도를 우선으로 하는가의 차이가 있습니다. 
 
 ### 테스트 이미지
 
