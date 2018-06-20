@@ -28,10 +28,10 @@ RUN apk --update add --virtual build-dependencies alpine-sdk automake autoconf l
 	&& cp /tmp/configure . && chown root:root configure \
 	&& ./configure --enable-debug \
 	&& LDFLAGS="-L/usr/local/lib" CFLAGS="-I/usr/local/include" make \
-	&& make install
+	&& make install \
 #	&& ldconfig \
-#	&& cd .. \
-#	&& rm -rf tesseract*  \
+	&& cd .. \
+	&& rm -rf tesseract*  \
 #	&& apk del build-dependencies
 # for shared libs
 #RUN apk --update add libpng-dev libjpeg-turbo-dev tiff-dev zlib-dev
