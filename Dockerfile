@@ -32,7 +32,7 @@ RUN apk --update add --virtual build-dependencies alpine-sdk automake autoconf l
 #	&& ldconfig \
 	&& cd .. \
 	&& rm -rf tesseract*  \
-#	&& apk del build-dependencies
+	&& apk del build-dependencies
 # for shared libs
 #RUN apk --update add libpng-dev libjpeg-turbo-dev tiff-dev zlib-dev
 # for tesseract data
