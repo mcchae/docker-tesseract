@@ -35,12 +35,12 @@ RUN apk --update add --virtual build-dependencies alpine-sdk automake autoconf l
 	&& apk del build-dependencies
 
 #  next shared libraries is need for running libtesseract.so
-ADD lib/* /usr/lib/
+ADD lib.tgz /tmp/
+#RUN	tar -xf /tmp/lib.tgz -C /usr/lib && rm /tmp/lib.tgz
 
 # for tesseract data
 WORKDIR /
 RUN apk --update add wget \
-#	&& kdir -p $TESSDATA_PREFIX/tessdata \
 	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/eng.traineddata \
 	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/kor.traineddata \
 	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/jpn.traineddata \
