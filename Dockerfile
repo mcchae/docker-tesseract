@@ -5,9 +5,6 @@ LABEL Description="alpine tesseract 4.x"
 
 ADD autogen.sh configure /tmp/
 
-ENV TESSDATA_PREFIX /usr/local/share
-ENV LAN_TYPE best
-#ENV LAN_TYPE fast
 WORKDIR /tmp
 RUN apk --update add --virtual build-dependencies alpine-sdk automake autoconf libtool \
 		libpng-dev libjpeg-turbo-dev tiff-dev zlib-dev wget git \
@@ -40,11 +37,14 @@ RUN	mv -f /tmp/lib/* /usr/lib \
 	&& rm -rf /tmp/lib /tmp/configure
 
 # for tesseract data
+ENV TESSDATA_PREFIX /usr/local/share/tessdata
+ENV LAN_TYPE best
+#ENV LAN_TYPE fast
 WORKDIR /
 RUN apk --update add wget \
-	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/eng.traineddata \
-	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/kor.traineddata \
-	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/jpn.traineddata \
-	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/chi_tra.traineddata
+	&& wget -q -P $TESSDATA_PREFIX https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/eng.traineddata \
+	&& wget -q -P $TESSDATA_PREFIX https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/kor.traineddata \
+	&& wget -q -P $TESSDATA_PREFIX https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/jpn.traineddata \
+	&& wget -q -P $TESSDATA_PREFIX https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/chi_tra.traineddata
 
 CMD ["tesseract"]
