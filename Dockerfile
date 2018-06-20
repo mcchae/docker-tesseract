@@ -34,6 +34,9 @@ RUN apk --update add --virtual build-dependencies alpine-sdk automake autoconf l
 	&& rm -rf tesseract* \
 	&& apk del build-dependencies
 
+#  next shared libraries is need for running libtesseract.so
+ADD lib/* /usr/lib/
+
 # for tesseract data
 WORKDIR /
 RUN apk --update add wget \
