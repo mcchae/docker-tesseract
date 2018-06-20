@@ -31,16 +31,16 @@ RUN apk --update add --virtual build-dependencies alpine-sdk automake autoconf l
 	&& make install \
 #	&& ldconfig \
 	&& cd .. \
-	&& rm -rf tesseract* 
-	# next command cause shared library error
-#	&& apk del build-dependencies
+	&& rm -rf tesseract* \
+	&& apk del build-dependencies
 
 # for tesseract data
-#WORKDIR /
-#RUN mkdir -p $TESSDATA_PREFIX/tessdata \
-#	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/eng.traineddata \
-#	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/kor.traineddata \
-#	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/jpn.traineddata \
-#	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/chi_tra.traineddata \
+WORKDIR /
+RUN apk --update add wget \
+#	&& kdir -p $TESSDATA_PREFIX/tessdata \
+	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/eng.traineddata \
+	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/kor.traineddata \
+	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/jpn.traineddata \
+	&& wget -q -P $TESSDATA_PREFIX/tessdata/ https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/chi_tra.traineddata
 
 CMD ["tesseract"]
