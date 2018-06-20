@@ -31,10 +31,10 @@ RUN apk --update add --virtual build-dependencies alpine-sdk automake autoconf l
 	&& make install \
 #	&& ldconfig \
 	&& cd .. \
-	&& rm -rf tesseract*  \
-	&& apk del build-dependencies
-# for shared libs
-#RUN apk --update add libpng-dev libjpeg-turbo-dev tiff-dev zlib-dev
+	&& rm -rf tesseract* 
+	# next command cause shared library error
+#	&& apk del build-dependencies
+
 # for tesseract data
 #WORKDIR /
 #RUN mkdir -p $TESSDATA_PREFIX/tessdata \
