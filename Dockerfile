@@ -1,1 +1,1 @@
-Dockerfile.ubunt1604
+Dockerfile.alpine
