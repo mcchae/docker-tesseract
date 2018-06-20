@@ -38,8 +38,8 @@ RUN	mv -f /tmp/lib/* /usr/lib \
 
 # for tesseract data
 ENV TESSDATA_PREFIX /usr/local/share/tessdata
-ENV LAN_TYPE best
-#ENV LAN_TYPE fast
+#ENV LAN_TYPE best
+ENV LAN_TYPE fast
 WORKDIR /
 RUN apk --update add wget \
 	&& wget -q -P $TESSDATA_PREFIX https://github.com/tesseract-ocr/tessdata_$LAN_TYPE/raw/master/eng.traineddata \
